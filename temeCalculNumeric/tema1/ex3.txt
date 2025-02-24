@@ -1,0 +1,44 @@
+import math
+import random
+
+def P1(x):
+    y=x-(1/math.factorial(3))*(x**3)+(1/math.factorial(5))*(x**5)
+    return y
+
+def P2(x):
+    y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5)-(1/math.factorial(7))*(x**7)
+    return y
+
+def P3(x):
+    y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5) - (1 / math.factorial(7)) * (x ** 7)+(1/math.factorial(9))*(x**9)
+    return y
+
+def P4(x):
+    y=x-0.166*(x**3)+0.00833*(x**5)-(1/math.factorial(7))*(x**7)+(1/math.factorial(9))*(x**9)
+    return y
+
+def P5(x):
+    y=x-0.1666*(x**3)+0.008333*(x**5)-(1/math.factorial(7))*(x**7)+(1/math.factorial(9))*(x**9)
+    return y
+
+def P6(x):
+    y=x-0.16666*(x**3)+0.0083333*(x**5)-(1/math.factorial(7))*(x**7)+(1/math.factorial(9))*(x**9)
+    return y
+
+def P7(x):
+    y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5) - (1 / math.factorial(7)) * (
+                x ** 7) + (1 / math.factorial(9)) * (x ** 9)-(1/math.factorial(11))*(x**1)
+    return y
+
+def P8(x):
+    y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5) - (1 / math.factorial(7)) * (
+            x ** 7) + (1 / math.factorial(9)) * (x ** 9) - (1 / math.factorial(11)) * (x ** 1)+(1/math.factorial(13))*(x**13)
+    return y
+
+err1=10**100
+err2=10**100
+err3=10**100
+
+for i in range(10000):
+    x=random.uniform(-(math.pi), math.pi)
+    valoareExacta=math.sin(x)
