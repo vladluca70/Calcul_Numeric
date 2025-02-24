@@ -1,0 +1,40 @@
+#prima parte
+#operatia de adunare este neasociativa
+u=1.0
+while 1.0+u!=1.0:
+    u=u/10
+u=u*10
+print(u)
+
+
+x=1.0
+y=u
+z=u
+
+m1=(x+y)+z
+m2=x+(y+z)
+
+print(m1)
+print(m2)
+print(m1==m2)
+
+
+
+
+///////////////////////////////////////////
+
+import math
+#x = 1.0e30
+ok=1
+x=10
+y = 1.0e-20
+z = 1.0e-40
+
+while ok==1:
+    p1 = (x * y) * z
+    p2 = x * (y * z)
+    if p1!=p2:
+        ok=0
+    else:
+        x=x**10
+print(x)
