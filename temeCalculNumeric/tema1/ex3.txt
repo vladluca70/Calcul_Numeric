@@ -1,44 +1,167 @@
 import math
 import random
+import time
 
-def P1(x):
+def P_1(x):
     y=x-(1/math.factorial(3))*(x**3)+(1/math.factorial(5))*(x**5)
     return y
 
-def P2(x):
+def P_2(x):
     y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5)-(1/math.factorial(7))*(x**7)
     return y
 
-def P3(x):
+def P_3(x):
     y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5) - (1 / math.factorial(7)) * (x ** 7)+(1/math.factorial(9))*(x**9)
     return y
 
-def P4(x):
+def P_4(x):
     y=x-0.166*(x**3)+0.00833*(x**5)-(1/math.factorial(7))*(x**7)+(1/math.factorial(9))*(x**9)
     return y
 
-def P5(x):
+def P_5(x):
     y=x-0.1666*(x**3)+0.008333*(x**5)-(1/math.factorial(7))*(x**7)+(1/math.factorial(9))*(x**9)
     return y
 
-def P6(x):
+def P_6(x):
     y=x-0.16666*(x**3)+0.0083333*(x**5)-(1/math.factorial(7))*(x**7)+(1/math.factorial(9))*(x**9)
     return y
 
-def P7(x):
+def P_7(x):
     y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5) - (1 / math.factorial(7)) * (
                 x ** 7) + (1 / math.factorial(9)) * (x ** 9)-(1/math.factorial(11))*(x**1)
     return y
 
-def P8(x):
+def P_8(x):
     y = x - (1 / math.factorial(3)) * (x ** 3) + (1 / math.factorial(5)) * (x ** 5) - (1 / math.factorial(7)) * (
-            x ** 7) + (1 / math.factorial(9)) * (x ** 9) - (1 / math.factorial(11)) * (x ** 1)+(1/math.factorial(13))*(x**13)
+           x ** 7) + (1 / math.factorial(9)) * (x ** 9) - (1 / math.factorial(11)) * (x ** 1)+(1/math.factorial(13))*(x**13)
     return y
 
-err1=10**100
-err2=10**100
-err3=10**100
+def P1(x,c1,c2):
+    y=x**2
+    rez=x*(1-y*(c1-c2*y))
+    #rez=x*(1-y*((1/math.factorial(3))-y*(1/math.factorial(5))))
+    return rez
+
+def P2(x,c1,c2,c3):
+    y=x**2
+    rez=x*(1+y*(-c1+y*(c2-c3*y)))
+    #rez=x*(1+y*(-(1/math.factorial(3))+y*((1/math.factorial(5))-(1/math.factorial(7))*y)))
+    return rez
+
+def P3(x,c1,c2,c3,c4):
+    y=x**2
+    rez=x*(1-y*(c1-y*(c2-y*(c3-c4*y))))
+    #rez=x*(1-y*((1/math.factorial(3))-y*((1/math.factorial(5))-y*((1/math.factorial(7))-(1/math.factorial(9))*y))))
+    return rez
+
+def P4(x,c3,c4):
+    y=x**2
+    rez=x*(1-y*(0.166-y*(0.00833-y*(c3-c4*y))))
+    #rez=x*(1-y*(0.166-y*(0.00833-y*((1/math.factorial(7))-(1/math.factorial(9))*y))))
+    return rez
+
+def P5(x,c3,c4):
+    y=x**2
+    rez=x*(1-y*(0.1666-y*(0.008333-y*(c3-c4*y))))
+    #rez=x*(1-y*(0.1666-y*(0.008333-y*((1/math.factorial(7))-(1/math.factorial(9))*y))))
+    return rez
+
+def P6(x,c3,c4):
+    y=x**2
+    rez=x*(1-y*(0.166-y*(0.00833-y*(c3-c4*y))))
+    #rez=x*(1-y*(0.16666-y*(0.0083333-y*((1/math.factorial(7))-(1/math.factorial(9))*y))))
+    return rez
+
+def P7(x,c1,c2,c3,c4,c5):
+    y=x**2
+    rez=x*(1-y*(c1-y*(c2-y*(c3-y*(c4-c5*y)))))
+    #rez = x * (1 - y * ((1/math.factorial(3)) - y * ((1/math.factorial(5)) - y * ((1/math.factorial(7)) - y * ((1/math.factorial(9)) - (1/math.factorial(11)) * y)))))
+    return rez
+
+def P8(x,c1,c2,c3,c4,c5,c6):
+    y=x**2
+    rez=x*(1-y*(c1-y*(c2-y*(c3-y*(c4-y*(c5-c6*y))))))
+    #rez=x*(1-y*((1/math.factorial(3))-y*((1/math.factorial(5))-y*((1/math.factorial(7))-y*((1/math.factorial(9))-y*((1/math.factorial(11))-(1/math.factorial(13))*y))))))
+    return rez
+
+
+c1=1/math.factorial(3)
+c2=1/math.factorial(5)
+c3=1/math.factorial(7)
+c4=1/math.factorial(9)
+c5=1/math.factorial(11)
+c6=1/math.factorial(13)
+
+time1=time2=time3=time4=time5=time6=time7=time8=0
+err1=err2=err3=err4=err5=err6=err7=err8=0
 
 for i in range(10000):
-    x=random.uniform(-(math.pi), math.pi)
+    x=random.uniform(-(math.pi)/2, (math.pi)/2)
     valoareExacta=math.sin(x)
+
+    start1=time.time()
+    p1=P1(x,c1,c2)
+    end1=time.time()
+    end1=end1-start1
+    time1=time1+end1
+    err1=err1+abs(p1-valoareExacta)
+
+    start2 = time.time()
+    p2 = P2(x, c1, c2, c3)
+    end2 = time.time()
+    end2 = end2 - start2
+    time2 = time2 + end2
+    err2 = err2 + abs(p2 - valoareExacta)
+
+    start3 = time.time()
+    p3 = P3(x, c1, c2,c3,c4)
+    end3 = time.time()
+    end3 = end3 - start3
+    time3 = time3 + end3
+    err3 = err3 + abs(p3 - valoareExacta)
+
+    start4 = time.time()
+    p4 = P4(x, c3, c4)
+    end4 = time.time()
+    end4 = end4 - start4
+    time4 = time4 + end4
+    err4 = err4 + abs(p4 - valoareExacta)
+
+    start5 = time.time()
+    p5 = P5(x, c3, c4)
+    end5 = time.time()
+    end5 = end5 - start5
+    time5 = time5 + end5
+    err5 = err5 + abs(p5 - valoareExacta)
+
+    start6 = time.time()
+    p6 = P6(x, c3, c4)
+    end6 = time.time()
+    end6 = end6 - start6
+    time6 = time6 + end6
+    err6 = err6 + abs(p6 - valoareExacta)
+
+    start7 = time.time()
+    p7 = P7(x, c1, c2,c3,c4,c5)
+    end7 = time.time()
+    end7 = end7 - start7
+    time7 = time7 + end7
+    err7 = err7 + abs(p7 - valoareExacta)
+
+    start8 = time.time()
+    p8 = P8(x, c1, c2,c3,c4,c5,c6)
+    end8 = time.time()
+    end8 = end8 - start8
+    time8 = time8 + end8
+    err8 = err8 + abs(p8 - valoareExacta)
+
+err_list={'P1':err1,'P2':err2,'P3':err3,'P4':err4,'P5':err5,'P6':err6,'P7':err7,'P8':err8}
+time_list={'timeP1':time1,'timeP2':time2,'timeP3':time3,'timeP4':time4,'timeP5':time5,'timeP6':time6,'timeP7':time7,'timeP8':time8}
+
+print("erori")
+for x,y in err_list.items():
+    print(x,"=",y)
+
+print("timp")
+for x,y in time_list.items():
+    print(x,"=",y)
