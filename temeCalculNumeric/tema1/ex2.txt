@@ -1,5 +1,11 @@
 #prima parte
 #operatia de adunare este neasociativa
+import tkinter as tk
+
+root = tk.Tk()
+frame = tk.Frame(root, bd=2, relief="solid", padx=70, pady=100)
+frame.pack(padx=20, pady=20)
+
 u=1.0
 while 1.0+u!=1.0:
     u=u/10
@@ -19,12 +25,23 @@ print(m2)
 print(m1==m2)
 
 
+label = tk.Label(frame, text=f"Rezultatul u este {u*10}\n m1 este {m1} \n m2 este {m2} m1==m2:{m1==m2}")
+label.pack()
+
+root.mainloop()
+
 
 
 ///////////////////////////////////////////
 
 import math
 #x = 1.0e30
+import tkinter as tk
+
+root = tk.Tk()
+frame = tk.Frame(root, bd=2, relief="solid", padx=70, pady=100)
+frame.pack(padx=20, pady=20)
+
 ok=1
 x=10
 y = 1.0e-20
@@ -38,3 +55,8 @@ while ok==1:
     else:
         x=x**10
 print(x)
+
+label = tk.Label(frame, text=f"Rezultatul este {x}")
+label.pack()
+
+root.mainloop()
