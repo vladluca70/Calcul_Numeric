@@ -1,0 +1,108 @@
+import math
+import random
+import numpy as np
+
+n = int(input("n: "))
+epsilon = float(input("epsilon: "))
+
+A = [
+    [2, 4, 1],
+    [6, 18, 5],
+    [8, 46, 17]
+]
+
+b = []
+dU = []
+for i in range(n):
+    x = int(random.uniform(-100, 100))
+    dU.append(x)
+    x = int(random.uniform(-100, 100))
+    b.append(x)
+
+for i in range(n):
+    if dU[i]<epsilon:
+        print("eroare epsilon")
+        exit()
+
+L=[]
+U=[]
+for i in range(n):
+    line=[]
+    for j in range(n):
+        line.append(0)
+    L.append(line)
+    U.append(line)
+
+for i in range(n):
+    L[i][i] = 1
+    U[i][i] = dU[i]
+
+for i in range(n):
+    for j in range(i, n):
+        suma1 = sum(L[i][k] * U[k][j] for k in range(i))
+        U[i][j] = (A[i][j] - suma1)
+
+    for j in range(i + 1, n):
+        suma2 = sum(L[j][k] * U[k][i] for k in range(i))
+        L[j][i] = (A[j][i] - suma2) / U[i][i]
+
+print("\nL:")
+for row in L:
+    print(row)
+
+print("\nU:")
+for row in U:
+    print(row)
+
+# Calcul determinant: det(A) = det(L) * det(U)
+detL = 1
+detU = 1
+for i in range(n):
+    detU *= U[i][i]
+
+detA = detU * detL
+print("\nDeterminantul lui A este:", detA)
+
+# Ax=b <==> LUx = b -> Ly = b și Ux = y
+y = [0] * n
+for i in range(n):
+    suma = sum(L[i][j] * y[j] for j in range(i))
+    y[i] = (b[i] - suma)
+
+x = [0] * n
+for i in range(n - 1, -1, -1):
+    suma = sum(U[i][j] * x[j] for j in range(i + 1, n))
+    x[i] = (y[i] - suma) / U[i][i]
+
+print("\nVectorul y:", y)
+print("Vectorul x:", x)
+
+#norma euclidiana
+#||t|| unde t=Ax-b si ||t|| se face radical din suma patratelor
+rez_Ax=[]
+for i in range(n):
+    suma=0
+    for j in range(n):
+        suma=suma+A[i][j]*x[j]
+    rez_Ax.append(suma)
+for i in range(n):
+    rez_Ax[i]=rez_Ax[i]-b[i]
+norma=0
+for i in range(n):
+    norma=norma+rez_Ax[i]*rez_Ax[i]
+norma=math.sqrt(norma)
+print("norma=",norma)
+
+def inversa_matrice(A):
+    A = np.array(A)  # Convertim la array NumPy pentru a putea folosi funcțiile acestuia
+    if A.shape[0] != A.shape[1]:
+        return "Matricea nu este pătratică, deci nu poate avea inversă."
+
+    try:
+        A_inv = np.linalg.inv(A)
+        return A_inv
+    except np.linalg.LinAlgError:
+        return "matricea nu e inversabila deoarece detA=0"
+
+inversa_matrice_A=inversa_matrice(A)
+print("inversa_matrice_A:", inversa_matrice_A)
