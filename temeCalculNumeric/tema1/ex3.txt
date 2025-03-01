@@ -158,10 +158,15 @@ for i in range(10000):
 err_list={'P1':err1,'P2':err2,'P3':err3,'P4':err4,'P5':err5,'P6':err6,'P7':err7,'P8':err8}
 time_list={'timeP1':time1,'timeP2':time2,'timeP3':time3,'timeP4':time4,'timeP5':time5,'timeP6':time6,'timeP7':time7,'timeP8':time8}
 
-print("erori")
-for x,y in err_list.items():
-    print(x,"=",y)
+sorted_err_list = dict(sorted(err_list.items(), key=lambda item: item[1]))
+sorted_time_list = dict(sorted(time_list.items(), key=lambda item: item[1]))
 
-print("timp")
-for x,y in time_list.items():
+
+print("errors")
+for x,y in sorted_err_list.items():
+    print(x,"=",y)
+print()
+
+print("time")
+for x,y in sorted_time_list.items():
     print(x,"=",y)
